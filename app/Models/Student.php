@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\models\Scholarship;
+use App\Models\User;
 
 class Student extends Model
 {
@@ -25,6 +27,6 @@ class Student extends Model
     public function scholarships()
     {
         return $this->belongsToMany(Scholarship::class)
-        ->withTimestamp();
+        ->withTimestamps();
     }
 }

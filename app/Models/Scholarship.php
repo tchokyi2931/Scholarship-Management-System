@@ -4,19 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Student;
 
-class scholarship extends Model 
+class Scholarship extends Model 
 {
-    protected $table = 'scholarships';
-    
     use HasFactory;
-    
-    protected $fillable = [
-        'title',
-        'description',
-        'amount',
-        
-    ];
+
+    protected $table = 'scholarships';
+
+    protected $guarded = [];
 
     public function students()
     {

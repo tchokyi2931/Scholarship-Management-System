@@ -11,10 +11,6 @@
                 </div>
             </a>
         @endforeach
-
-        <div>
-            {{ $scholarships->links() }}
-        </div>
 </div>
 
 </x-layout>  
