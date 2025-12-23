@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ScholarshipController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Scholarship;
    
@@ -12,31 +13,30 @@ Route::get('/student', function () {
     return view('student');
 });
 
-Route::get('/scholarships', function () {
+//index
+Route::get('/scholarships',[ScholarshipController::class, 'index']);
 
-    return view('scholarships.index', [
-        'scholarships' => Scholarship::all()
-    ]);
-});
+// Route::get('/scholarships', function () {
 
-Route::get('/scholarships/create', function(){
-    return view('scholarships.create');
-});
+//     return view('scholarships.index', [
+//         'scholarships' => Scholarship::all()
+//     ]);
+// });
 
-Route::get('/scholarships/{id}', function ($id) {
-    $scholarship = Scholarship::find($id);
+//Create
+Route::get('/scholarships/create', [ScholarshipController::class, 'create']);
 
-    return view('scholarships.show', ['scholarship' => $scholarship]);
-});
+//show
+Route::get('/scholarships/{scholarship}', [ScholarshipController::class, 'show']);
 
-Route::post('/scholarships', function() {
-    //validation...
- 
-    Scholarship::create([
-        'title' => request('title'),
-        'amount' => request('amount'),
-        'description' => request('description')
-    ]);
+// Store
+Route::post('/scholarships', [ScholarshipController::class, 'store']);
 
-    return redirect('/scholarships');
-});
+//edit
+Route::get('/scholarships/{scholarship}/edit', [ScholarshipController::class, 'edit']);
+
+//update
+Route::patch('/scholarships/{scholarship}', [ScholarshipController::class, 'update']);
+
+//delete
+Route::delete('/scholarships/{scholarship}', [ScholarshipController::class, 'destroy']);
