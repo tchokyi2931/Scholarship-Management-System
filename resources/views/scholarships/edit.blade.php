@@ -15,7 +15,7 @@
           <label for="title" class="block text-sm/6 font-medium text-gray-900">Title</label>
           <div class="mt-2">
             <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <input id="title" type="text" name="title" placeholder="Shift leader" class="block min-w-0 grow bg-white py-1.5 px-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6" required>
+              <input id="title" type="text" name="title" value="{{ $scholarship->title }}" class="block min-w-0 grow bg-white py-1.5 px-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6" required>
             </div>
 
             @error('title')
@@ -28,7 +28,7 @@
           <label for="amount" class="block text-sm/6 font-medium text-gray-900">Amount</label>
           <div class="mt-2">
             <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <input id="amount" type="text" name="amount" placeholder="Rs. 50,000 Per year" class="block min-w-0 grow bg-white py-1.5 px-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6" required/>
+              <input id="amount" type="text" name="amount" value="{{ $scholarship->amount }}" class="block min-w-0 grow bg-white py-1.5 px-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6" required/>
             </div>
 
             @error('amount')
@@ -59,7 +59,7 @@
 </div>
 </form>
 
-<form method="POST" action="/scholarhships/{{ $scholarship->id }}" id="delete-form"  class="hidden">
+<form method="POST" action="/scholarships/{{ $scholarship->id }}" id="delete-form"  class="hidden">
   @csrf
   @method('DELETE')
 </form>

@@ -14,7 +14,7 @@ class Scholarship extends Model
 
     protected $guarded = [];
 
-    public function students()
+     public function students()
     {
         return $this->belongsToMany(Student::class)
         ->withTimestamps();

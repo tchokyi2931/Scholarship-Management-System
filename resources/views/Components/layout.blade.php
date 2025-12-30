@@ -22,31 +22,31 @@
               <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
               <x-nav-link href="/student" :active="request()->is('student')">Student</x-nav-link>
               <x-nav-link href="/scholarships" :active="request()->is('scholarships')">Scholarship</x-nav-link>
-              
+              @auth
+              @if(auth()->user()->isAdmin())
+                <x-nav-link href="/users" :active="request()->is('users*')">Users</x-nav-link>
+                @endif
+                @endauth
             </div>
           </div>
         </div>
         <div class="hidden md:block">
           <div class="ml-4 flex items-center md:ml-6">
-            <button type="button" class="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
-              <span class="absolute -inset-1.5"></span>
-              <span class="sr-only">View notifications</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6">
-                <path d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </button>
+            @guest
+            <x-nav-link href="/login" :active="request()->is('login')">Log In</x-nav-link>
+            <x-nav-link href="/register" :active="request()->is('register')">Register</x-nav-link>
+            @endguest
 
-            <!-- Profile dropdown -->
-            <el-dropdown class="relative ml-3">
-              <button class="relative flex max-w-xs items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-                <span class="absolute -inset-1.5"></span>
-                <span class="sr-only">Open user menu</span>
-                <img src="https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0=" alt="" class="size-8 rounded-full outline -outline-offset-1 outline-white/10" />
-              </button>
+            @auth
+            <form method="POST" action="/logout">
+              @csrf
+              <x-form-button>Log Out</x-form-button>
+            </form>
+            @endauth
+             
 
-              
           </div>
-        </div>
+        </div  >
         <div class="-mr-2 flex md:hidden">
           <!-- Mobile menu button -->
           <button type="button" command="--toggle" commandfor="mobile-menu" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
@@ -69,7 +69,11 @@
         <a href="/" aria-current="page" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white">Home</a>
         <a href="/student" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Student</a>
         <a href="/scholarship" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Scholarship</a>
-        
+         @auth
+            @if(auth()->user()->isAdmin())
+                <a href="/users" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Users</a>
+            @endif
+        @endauth
       </div>
       <div class="border-t border-white/10 pt-4 pb-3">
         <div class="flex items-center px-5">
@@ -97,9 +101,11 @@
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 sm:flex sm:justify-between">
       <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $heading }}</h1>
     
-      <x-button href="/scholarships/create">Create Scholarship</x-button>
+      <x-button href="/students/create">Add Student</x-button>
+
     </div>
   </header>
+  
   <main>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       {{ $slot }}

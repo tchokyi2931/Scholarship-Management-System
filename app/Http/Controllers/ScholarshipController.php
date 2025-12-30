@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Scholarship;
+
 
 class ScholarshipController extends Controller
 {
@@ -11,7 +13,9 @@ class ScholarshipController extends Controller
      */
     public function index()
     {
-        //
+        return view('scholarships.index', [
+            'scholarships' => Scholarship::simplePaginate(3)
+        ]);
     }
 
     /**
@@ -76,6 +80,7 @@ class ScholarshipController extends Controller
     $scholarship->update([
         'title' => request('title'),
         'amount' => request('amount'),
+        'description' => request('description'),
     ]);
 
     //and persist

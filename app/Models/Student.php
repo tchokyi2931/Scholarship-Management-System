@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\models\Scholarship;
+use App\Models\Scholarship;
 use App\Models\User;
 
 class Student extends Model
 {
     use HasFactory;
+
+    protected $table = 'students';
 
     protected $fillable=[
         'name',

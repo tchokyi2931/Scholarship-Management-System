@@ -1,51 +1,63 @@
 <x-layout>
     <x-slot:heading>
-        Create Student
+        Add Student
     </x-slot:heading>
 
-<form method="POST" action="/studentsa">
+<form method="POST" action="/students">
     @csrf
   <div class="space-y-12">
     <div class="border-b border-gray-900/10 pb-12">
-      <h2 class="text-base/7 font-semibold text-gray-900">Create a new Student</h2>
-      <p class="mt-1 text-sm/6 text-gray-600">We jus need a handful of details from you.</p>
+      <h2 class="text-base/7 font-semibold text-gray-900">Add a new Student</h2>
+      <p class="mt-1 text-sm/6 text-gray-600">We just need a handful of details from you.</p>
 
       <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div class="sm:col-span-4">
-          <label for="name" class="block text-sm/6 font-medium text-gray-900">Name</label>
+        <x-form-field>
+          <x-form-label for="name">Name</x-form-label>
+
           <div class="mt-2">
-            <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <input id="name" type="text" name="name" placeholder="Tenzin" class="block min-w-0 grow bg-white py-1.5 px-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6" />
-            </div>
-          </div>
-        </div>
+            <x-form-input id="name" name="name" placeholder="Tenzin" value="{{ old('name') }}" required />
 
-       <div class="sm:col-span-4">
-          <label for="department" class="block text-sm/6 font-medium text-gray-900">Department</label>
+            <x-form-error name="name"/>
+          </div>
+        </x-form-field>
+
+        <x-form-field>
+          <x-form-label for="name">Email</x-form-label>
+
           <div class="mt-2">
-            <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <input id="department" type="text" name="department" placeholder="computer science" class="block min-w-0 grow bg-white py-1.5 px-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6" />
-            </div>
-          </div>
-        </div> 
-          </div>
+            <x-form-input id="email" name="email" placeholder="tenzin@example.com" value="{{ old('email') }}" type="email" required />
 
-          <!-- <div class="mt-10">
+            <x-form-error name="email"/>
+          </div>
+        </x-form-field>
 
-          @if($errors->any())
-          <ul>
-            @foreach($errors->all() as $error)
-            <li class="text-red-500 italic">{{ $error }}</li>
-            @endforeach
-        </ul>
-          @endif
-        </div> -->
-           
-        </div>
+        <x-form-field>
+          <x-form-label for="name">Student ID</x-form-label>
+
+          <div class="mt-2">
+            <x-form-input id="student_id" name="student_id" placeholder="STU001" value="{{ old('student_id') }}" required />
+
+            <x-form-error name="student_id"/>
+          </div>
+        </x-form-field>
+
+        <x-form-field>
+          <x-form-label for="name">Department</x-form-label>
+
+          <div class="mt-2">
+            <x-form-input id="department" name="department" placeholder="Computer Science" value="{{ old('department') }}" required />
+
+            <x-form-error name="department"/>
+          </div>
+        </x-form-field>
+     
+
       </div>
+    </div>
+  </div>
   <div class="mt-6 flex items-center justify-end gap-x-6">
-    <button type="button" class="text-sm/6 font-semibold text-gray-900">Cancel</button>
-    <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+    <a href="/students" class="text-sm/6 font-semibold text-gray-900">Cancel</a>
+    <x-form-button>Save</x-form-button>
   </div>
 </form>
 </x-layout>
