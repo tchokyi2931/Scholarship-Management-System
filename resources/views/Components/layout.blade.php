@@ -101,7 +101,17 @@
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 sm:flex sm:justify-between">
       <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $heading }}</h1>
     
-      <x-button href="/students/create">Add Student</x-button>
+      @auth
+    @if(auth()->user()->isAdmin())
+        @if(request()->is('students*'))
+            <x-button href="/students/create">Add Student</x-button>
+        @elseif(request()->is('scholarships*'))
+            <x-button href="/scholarships/create">Create Scholarship</x-button>
+        @elseif(request()->is('users*'))
+            <x-button href="/users/create">Create User</x-button>
+        @endif
+    @endif
+@endauth
 
     </div>
   </header>

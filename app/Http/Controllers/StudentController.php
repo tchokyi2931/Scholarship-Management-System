@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\Scholarship;
 use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
@@ -53,6 +54,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
+        $student->load('scholarships');
         return view('students.show', ['student' => $student]);
     }
 
@@ -117,4 +119,28 @@ class StudentController extends Controller
         //redirect
         return redirect('/students');
     }
+
+    public function attach(Student $student)
+{
+    $scholarships = Scholarship::all();
+
+    return view('students.attach', [
+        'student' => $student,
+        'scholarships' => $scholarships
+    ]);
+}
+
+public function attachScholarship(Student $student)
+{
+    $student->scholarships()->attach(request('scholarship'));
+
+    return redirect('/students/' . $student->id);
+}
+
+public function detachScholarship(Student $student)
+{
+    $student->scholarships()->detach(request('scholarship'));
+
+    return redirect('/students/' . $student->id);
+}
 }

@@ -28,7 +28,7 @@ class Student extends Model
 
     public function scholarships()
     {
-        return $this->belongsToMany(Scholarship::class)
+        return $this->belongsToMany(Scholarship::class, 'student_scholarship')
         ->withTimestamps();
     }
 }
